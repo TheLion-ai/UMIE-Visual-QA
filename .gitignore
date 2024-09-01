@@ -4,3 +4,4 @@ processed_
 data
 .lightning_studio
 .cursor-server
+.env
