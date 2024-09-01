@@ -2,8 +2,8 @@ from collections import defaultdict
 from datasets import Dataset
 import numpy as np
 import PIL
-from tqdm import tqdm
 from random import shuffle
+from rich.progress import track
 
 def group_into_cases(dataset: Dataset) -> defaultdict:
     cases = defaultdict(list)
@@ -18,7 +18,7 @@ def count_annotations(mask: "PIL.Image.Image") -> int:
 def find_interesting_examples(dataset: Dataset, max_examples: int = 10):
     cases = group_into_cases(dataset)
     interesting_examples = []
-    for study_id, indices in tqdm(cases.items()):
+    for study_id, indices in track(cases.items(), description = "[cyan]Selecting interesting examples"):
         mask_counts = [(i, count_annotations(dataset[i]["mask"])) for i in indices]
         mask_counts.sort(key=lambda x: x[1], reverse=True)
         interesting_indices, _ = zip(*mask_counts)

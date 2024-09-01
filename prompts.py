@@ -9,7 +9,9 @@ Don't include recomendations.
 """
 
 vqa_prompt = """
-Greate a set examples for Visual Questions Answering dataset based on this image.
+Based on the image create a set examples for Visual Questions Answering dataset based on this image.
+Don't use colors overlayid on the image they are just for your reference.
+Describe the information like if you were looking at a raw image without any overlays.
 Generate a set of questions and answers.
 The answers should be complete and detailed
 ### FORMAT ###

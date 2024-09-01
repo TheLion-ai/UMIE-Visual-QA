@@ -57,7 +57,10 @@ def visualize_segmentation_mask(image_np : np.array, mask_np: np.array, masks:  
     import tempfile
     import os
 
-    backtorgb = cv.cvtColor(image_np, cv.COLOR_GRAY2RGB)
+    if len(image_np.shape) == 2 or (len(image_np.shape) == 3 and image_np.shape[2] == 1):
+        backtorgb = cv.cvtColor(image_np, cv.COLOR_GRAY2RGB)
+    else:
+        backtorgb = image_np.copy()
     for i, (name, color) in enumerate(masks.items()):
         backtorgb[mask_np == color.target_color] = color_palette[i]
 
